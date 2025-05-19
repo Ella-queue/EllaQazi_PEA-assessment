@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.assignment3.DigitalController">
+   <children>
+      <BorderPane prefHeight="400.0" prefWidth="600.0">
+         <top>
+            <MenuBar BorderPane.alignment="CENTER">
+              <menus>
+                <Menu mnemonicParsing="false" text="File">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="Load" onAction="#loadItems"/>
+                      <MenuItem mnemonicParsing="false" text="Save" onAction="#saveItems"/>
+                      <MenuItem mnemonicParsing="false" text="Exit" onAction="#exitProgram"/>
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Search">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="By Title" onAction="#searchByTitle"/>
+                      <MenuItem mnemonicParsing="false" text="By Year and Type" onAction="#searchByYearType"/>
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Reports">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="List All" onAction="#listAll"/>
+                      <MenuItem mnemonicParsing="false" text="List by Year" onAction="#listByYear"/>
+                  </items>
+                </Menu>
+              </menus>
+            </MenuBar>
+         </top>
+         <center>
+            <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <VBox prefHeight="375.0" prefWidth="200.0" spacing="10.0">
+                     <children>
+                        <ComboBox prefWidth="150.0" promptText="Type" fx:id="comboBox">
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </ComboBox>
+                        <TextField maxWidth="100.0" prefWidth="50.0" promptText="Title" fx:id="titleField"/>
+                        <TextField maxWidth="100.0" prefWidth="50.0" promptText="Author" fx:id="authorField"/>
+                        <TextField maxWidth="100.0" prefWidth="50.0" promptText="Year" fx:id="yearField"/>
+                        <TextField maxWidth="100.0" prefWidth="50.0" promptText="Duration" fx:id="durationField"/>
+                         <TextField maxWidth="100.0" prefWidth="50.0" promptText="Genre" fx:id="genreField"/>
+                         <TextField maxWidth="100.0" prefWidth="50.0" promptText="Narrator" fx:id="narratorField"/>
+                         <TextField maxWidth="100.0" prefWidth="50.0" promptText="Journalist" fx:id="journalistField"/>
+                        <Button mnemonicParsing="false" text="Add" fx:id="addButton" onAction="#onAddButtonClick"/>
+                        <Button mnemonicParsing="false" text="Update" fx:id="updateButton" onAction="#onUpdateButtonClick"/>
+                        <Button mnemonicParsing="false" text="Delete" fx:id="deleteButton" onAction="#onDeleteButtonClick"/>
+                        <Button mnemonicParsing="false" text="Save" fx:id="saveButton" onAction="#onSaveButtonClick"/>
+                     </children>
+                     <padding>
+                        <Insets left="25.0" />
+                     </padding>
+                  </VBox>
+                  <VBox prefHeight="200.0" prefWidth="400.0">
+                     <children>
+                        <TableView prefHeight="200.0" prefWidth="200.0" fx:id="tableview">
+                          <columns>
+                            <TableColumn fx:id="typeColumn" prefWidth="75.0" text="Type" />
+                            <TableColumn fx:id="titleColumn" prefWidth="75.0" text="Title" />
+                              <TableColumn fx:id="authorColumn" prefWidth="75.0" text="Author" />
+                              <TableColumn fx:id="yearColumn" prefWidth="75.0" text="Year" />
+                              <TableColumn fx:id="formatColumn" prefWidth="75.0" text="Duration" />
+                              <TableColumn fx:id="exColumn" prefWidth="75.0" text="Info" />
+                          </columns>
+                        </TableView>
+                        <TextArea prefHeight="211.0" prefWidth="400.0" fx:id="textArea"/>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>
