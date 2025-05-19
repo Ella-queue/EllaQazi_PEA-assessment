@@ -1,0 +1,247 @@
+:root {
+    --greyDark: #352627;
+    --greyLight: #948a8c;
+    --redDark: #7b1422;
+    --redLight: #8c333d;
+    --offWhite: #eddadc;
+}
+
+body {
+    background-color: var(--greyDark);
+    color: var(--offWhite);
+    font-family: Helvetica, Arial, sans-serif;
+    margin-bottom: 8em;
+    display: grid;
+}
+
+header {
+    margin: 2%;
+    padding: 1em 3em;
+    border: solid 10px var(--redLight);
+    background-color: var(--offWhite);
+    color: var(--greyDark);
+    display: grid;
+    grid-template-areas:
+        "t"
+        "n";
+    width: 40vw;
+    justify-content: center;
+    justify-self: center;
+    overflow: hidden;
+
+    p {
+        margin: auto;
+        color: var(--redDark);
+    }
+}
+
+#titlelogo img {
+    width: 22%;
+    height: 100%;
+    grid-area: t;
+}
+
+a {
+    color: var(--redDark);
+}
+
+p a:visited {
+    font-style: oblique;
+    color: var(--redLight);
+}
+
+header nav {
+    grid-area: n;
+}
+
+h1 {
+    text-shadow: 3px 1px 0px var(--greyLight);
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 2.5cap;
+    letter-spacing: 0.2cap;
+    float: left;
+    margin-left: 2%;
+}
+
+header ul {
+    margin-top: 1%;
+    border-bottom: var(--offWhite);
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    flex-flow: row;
+    font-weight: bold;
+}
+
+section {
+    margin: 2cap;
+    padding: .5cap 2cap;
+    border: solid 6px var(--redLight);
+    background-color: var(--offWhite);
+    color: var(--greyDark);
+    width: 80vw;
+    justify-self: center;
+    overflow: hidden;
+}
+
+section#ratesTable {
+    overflow: scroll;
+}
+
+h2 {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 1.8em;
+    letter-spacing: 0.1cap;
+}
+
+footer {
+    border-top: solid 5px var(--redDark);
+    background-color: var(--offWhite);
+    color: var(--greyDark);
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 100vw;
+    justify-content: center;
+    justify-self: center;
+}
+
+nav a {
+    font-size: 0.8em;
+    text-align: center;
+    background-color: var(--redDark);
+    border: 2px solid var(--offWhite);
+    color: var(--offWhite);
+    display: inline-flex;
+    height: 0.8em;
+    width: 4em;
+    justify-content: center;
+}
+
+nav ul {
+    justify-content: center;
+}
+
+footer p {
+    font-size: 0.3em;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+td,
+th {
+    border: 1px solid var(--greyDark);
+}
+
+#imagesAndDescriptions {
+    display: grid;
+    grid-template-areas:
+        "ae aep"
+        "al alp"
+        "ar arp"
+        "br brp";
+}
+
+img {
+    margin: 5px;
+}
+
+#Aeden {
+    grid-area: ae;
+}
+
+#Alexis {
+    grid-area: al;
+}
+
+#Arthur {
+    grid-area: ar;
+}
+
+#Brayden {
+    grid-area: br;
+}
+
+#AedenDesc {
+    grid-area: aep;
+}
+
+#AlexisDesc {
+    grid-area: alp;
+}
+
+#ArthurDesc {
+    grid-area: arp;
+}
+
+#BraydenDesc {
+    grid-area: brp;
+}
+
+.linkList {
+    list-style-type: circle;
+}
+
+@media all and (max-width: 600px) {
+    header {
+        padding: 1em;
+    }
+
+    h1,
+    h2 {
+        font-size: 1.2em;
+    }
+
+    /*Advanced*/
+
+    ul {
+        font-size: 1.2em;
+    }
+
+    nav {
+
+        ul {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        a {
+            text-decoration: none;
+            padding: 0.8rem;
+            background-color: var(--redDark);
+            color: var(--offWhite);
+            font-size: 0.5em;
+        }
+
+    }
+
+    .noMobile {
+        display: none;
+    }
+}
+
+@media all and (min-width: 1024px) {
+    main {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+    }
+
+    section {
+        grid-column: 1/span 5;
+    }
+
+    nav {
+        a {
+            text-decoration: none;
+            padding: 1.2rem;
+            background-color: var(--redDark);
+            color: var(--offWhite);
+            font-size: 0.8em;
+        }
+    }
+
+}

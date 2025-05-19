@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Toolbox Trainers - Sign Up</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=yes">
+  <link href="styles/site.css" rel="stylesheet">
+  <link rel="icon" type="image/png" href="image/ttlogo.png">
+</head>
+
+<body>
+  <div>
+    <header>
+      <div id="titlelogo">
+        <h1 id="mainTitle">Toolbox Trainers</h1>
+        <br>
+        <img src="./images/ttlogo.png" alt="Toolbox Trainers logo: a red toolbox with two white Ts on it" width="71"
+          height="26" id="logo">
+      </div>
+      <p>www.toolbox-trainers.org</p>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="aboutus.html">About Us</a></li>
+          <li><a href="programsandfields.html">Programs & Fields</a></li>
+          <li><a href="testimonials.html">Testimonials</a></li>
+          <li class="noMobile"><a href="hours.html">Hours</a></li>
+          <li class="noMobile"><a href="contactus.html">Contact Us</a></li>
+          <li class="noMobile"><a href="links.html">Links</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <section>
+        <h2>Sign Up</h2>
+        <p>To sign up, please submit a form to be taken into consideration:
+        </p>
+      </section>
+      <section>
+        <h2>Sign Up Form</h2>
+        <form name="signUp" method="get" action="contacted.html">
+          <label for="firstName">First Name</label>
+          <input id="firstName" type="text" name="firstName" size="30" maxlength="30" placeholder="First-Name">
+          <br>
+          <label for="lastName">Last Name</label>
+          <input id="lastName" type="text" name="lastName" size="30" maxlength="30" placeholder="Last-Name">
+          <br>
+          <label for="email">Email</label>
+          <input id="email" type="email" name="email" size="30" maxlength="30" placeholder="example@email.com">
+          <br>
+          <label for="phone">Phone Number</label>
+          <input id="phone" type="tel" name="phone" size="15" maxlength="15" placeholder="000-000-0000">
+          <br>
+          <label for="position">Which position would you like to apply for?</label>
+          <select id="position" name="position">
+            <option>--Select One--</option>
+            <option value="intern">Internship</option>
+            <option value="manager">Manager</option>
+            <option value="receptionist">Receptionist</option>
+            <option value="socMedMan">Social Media Manager</option>
+            <option value="supervisor">Supervisor</option>
+            <option value="recruiter">Recruiter</option>
+            <option value="janitor">Janitor</option>
+          </select>
+          <br>
+          <fieldset>
+            <legend>When do you want to work?</legend>
+            <input id="weekdays" type="radio" name="days">
+            <label for="weekdays">Weekdays (Mon-Fri)</label>
+            <input id="weekends" type="radio" name="days">
+            <label for="weekends">Weekends (Sat-Sun)</label>
+            <input id="noPref" type="radio" name="days">
+            <label for="noPref">No Preference</label>
+          </fieldset>
+          <br>
+          <fieldset>
+            <legend>How would you like to be contacted?</legend>
+            <input id="emailOpt" name="email" type="checkbox">
+            <label for="emailOpt">Email</label>
+            <input id="phoneOpt" name="phone" type="checkbox">
+            <label for="phoneOpt">Phone Number</label>
+            <br>
+          </fieldset>
+          <textarea rows="5" cols="50">Comments, questions, or concerns</textarea>
+          <br>
+          <input value="Submit" type="submit">
+        </form>
+      </section>
+      <section>
+        <h2>Response Time</h2>
+        <p>You should expect a response within 5 days of submitting you form, if you did not receive one, please do not
+          hesitate to submit another form.</p>
+      </section>
+    </main>
+    <footer>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="aboutus.html">About Us</a></li>
+          <li><a href="programsandfields.html">Programs & Fields</a></li>
+          <li><a href="testimonials.html">Testimonials</a></li>
+          <li><a href="hours.html">Hours</a></li>
+          <li><a href="contactus.html">Contact Us</a></li>
+          <li><a href="links.html">Links</a></li>
+        </ul>
+      </nav>
+      <small>&copy; Copyright 2024. Licensed under Creative Commons</small>
+    </footer>
+  </div>
+</body>
+
+</html>
