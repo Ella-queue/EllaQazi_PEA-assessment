@@ -5,3 +5,8 @@
   <li>Problem Solving Reflection</li>
 </ul>
 <h2>Semester 2</h2>
+<ul>
+  <li>Design and Implementation of a Dynamic Website</li>
+  <li>Design and Implementation of an Object-Oriented GUI Program</li>
+  <li>Resume</li>
+</ul>
