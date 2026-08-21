@@ -1,4 +1,4 @@
-</h1> Second Year </h1>
+<h1> Second Year </h1>
 <h2>Semester 3</h2>
 <ul>
   <li>HVK Data Model</li>
