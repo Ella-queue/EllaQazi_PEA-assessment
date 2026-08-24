@@ -1,0 +1,14 @@
+﻿@model W26HVKTEAM4.Models.Hvkuser
+<main>
+    <h1>Create New Customer</h1>
+    <div>
+        <form asp-action="Create">
+            <input type="hidden" asp-for="Pets" value="null"/>
+            <span asp-validation-for="Pets" class="text-danger"></span>
+            @await Html.PartialAsync("CustomerForm")
+            <div class="inputDiv">
+                <input type="submit" id="submit" value="Create Customer" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</main>

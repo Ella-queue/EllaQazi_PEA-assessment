@@ -1,0 +1,126 @@
+﻿@model IEnumerable<W26HVKTEAM4.Models.Pet>
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "_Layout";
+    var userType = Context.Session.GetString("UserType");
+    var loggedInUserId = Context.Session.GetInt32("UserId");
+}
+<main>
+    <h1>Pets</h1>
+
+    <button onclick="location.href='@Url.Action("Create", new { id = ViewBag.OwnerId })'" class="btn btn-primary">Add New Pet</button>
+    <br /><br />
+
+    <table>
+        <tr>
+            <th>
+                <h3>Name</h3>
+            </th>
+            <th>
+                <h3>Gender</h3>
+            </th>
+            <th>
+                <h3>Breed</h3>
+            </th>
+            <th>
+                <h3>Born</h3>
+            </th>
+            <th>
+                <h3>Size</h3>
+            </th>
+            <th>
+                <h3>Barker</h3>
+            </th>
+            <th>
+                <h3>Climber</h3>
+            </th>
+            <th>
+                <h3>Sterilized</h3>
+            </th>
+            <th>
+                <h3>Notes</h3>
+            </th>
+            <th>
+                <h3>Vaccinations</h3>
+            </th>
+            <th>
+                <h3></h3>
+            </th>
+        </tr>
+        @foreach (var pet in Model)
+        {
+            <tr>
+                <td>
+                    <h3>@Html.DisplayFor(modelItem => pet.Name)</h3>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => pet.Gender)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => pet.Breed)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => pet.Birthyear)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => pet.DogSize)
+                </td>
+                <td>
+                    @if (pet.Barker)
+                    {
+                        <p>Yes</p>
+                    }
+                    else
+                    {
+                        <p>No</p>
+                    }
+                </td>
+                <td>
+                    @if (pet.Climber)
+                    {
+                        <p>Yes</p>
+                    }
+                    else
+                    {
+                        <p>No</p>
+                    }
+                </td>
+                <td>
+                    @if (pet.Sterilized)
+                    {
+                        <p>Yes</p>
+                    }
+                    else
+                    {
+                        <p>No</p>
+                    }
+                </td>
+                <td>
+                    <details>
+                        <summary><strong>Notes:</strong></summary>
+                        @Html.DisplayFor(modelItem => pet.SpecialNotes)
+                    </details>
+                </td>
+                <td>
+                    @* <details>
+                        <summary><strong>Vaccinations:</strong></summary>
+                        @foreach (var vaccination in pet.PetVaccinations)
+                        {
+                            <p>Vaccination: @Html.DisplayFor(modelItem => vaccination.Vaccination.Name)</p>
+                            <p>Expires: @Html.DisplayFor(modelItem => vaccination.ExpiryDate)</p>
+                        }
+                    </details> *@
+                    <a asp-action="Vaccinations" asp-route-id="@pet.PetId">Vaccinations</a>
+                </td>
+                <td class="button_table">
+                    <button onclick="location.href='@Url.Action("Edit", new { id = pet.PetId })'" class="btn btn-secondary">Edit</button>
+                </td>
+                <td class="button_table">
+                    <button onclick="location.href='@Url.Action("Delete", new { id = pet.PetId })'" class="btn btn-danger">Remove</button>
+                </td>
+            </tr>
+        }
+    </table>
+</main>

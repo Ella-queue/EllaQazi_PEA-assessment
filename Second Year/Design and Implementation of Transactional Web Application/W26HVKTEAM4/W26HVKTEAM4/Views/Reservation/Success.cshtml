@@ -1,0 +1,18 @@
+﻿@{
+    ViewData["Title"] = "Reservation Success";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<main>
+    <div class="success-card">
+        <h2>Success</h2>
+
+        <p>@ViewBag.Message</p>
+
+        <a asp-controller="Reservation"
+           asp-action="Index"
+           class="create-btn">
+            Back to Reservations
+        </a>
+    </div>
+</main>

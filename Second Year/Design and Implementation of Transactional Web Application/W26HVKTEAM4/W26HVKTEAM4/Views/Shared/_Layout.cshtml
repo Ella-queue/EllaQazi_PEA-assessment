@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>HVK</title>
+    <link href="~/css/site.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=ADLaM+Display&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        @if (Context.Session.GetInt32("UserId").HasValue)
+        {
+            @if (Context.Session.GetString("UserType")?.ToLower() == "employee")
+            {
+                <div id="imagesTitle">
+                    <img id="logoHVK" src="~/images/HVK_Logo.png" />
+                    <h1>Happy Valley Kennels</h1>
+                    <div id="iconDiv">
+                        <img src="~/images/User_Icon.png" />
+                        <p>Employee</p>
+                        @Html.ActionLink("Log Out", "Logout", "Account")
+                    </div>
+                </div>
+                <nav>
+                    @Html.ActionLink("Home", "Employee", "Home", null, new { title = "Return to the Home Page" })
+                    @Html.ActionLink("Reservation", "Index", "Reservation", new { userType = "Employee" }, new { title = "To Reservation Page" })
+                    @Html.ActionLink("Runs", "Index", "Run", null, new { title = "To Runs Page" })
+                    @Html.ActionLink("Accounts", "Index", "Customer", null, new { title = "To Account Page" })
+                </nav>
+            }
+            else
+            {
+                var loggedInUserId = Context.Session.GetInt32("UserId");
+
+                <div id="imagesTitle">
+                    <img id="logoHVK" src="~/images/HVK_Logo.png" />
+                    <h1>Happy Valley Kennels</h1>
+                    <div id="iconDiv">
+                        <img src="~/images/User_Icon.png" />
+                        @Html.ActionLink($"{TempData.Peek("UserName") }", "Details", "Customer", new { id = loggedInUserId, userType = "Customer" }, new { title = "To Account Page" })
+                        @Html.ActionLink("Log Out", "Logout", "Account")
+                        
+                    </div>
+                </div>
+                <nav>
+                    @Html.ActionLink("Home", "Customer", "Home", new { customerId = loggedInUserId }, new { title = "Return to the Home Page" })
+                    @Html.ActionLink("Pets", "Index", "Pet", new { id = loggedInUserId }, new { title = "To Pet Page" })
+                    @Html.ActionLink("Reservation", "Index", "Reservation", new { customerId = loggedInUserId })
+                    @Html.ActionLink("About Us (WIP)", "UnderConstruction", "Home", new { customerId = loggedInUserId })
+                    @Html.ActionLink("FAQ (WIP)", "UnderConstruction", "Home", new { customerId = loggedInUserId })
+                </nav>
+            }
+        }
+    </header>
+
+    @RenderBody()
+
+    <footer>
+        <br />
+        Copyright &copy; @DateTime.Now.Year Happy Valley Kennels<br>
+    </footer>
+</body>
+</html>

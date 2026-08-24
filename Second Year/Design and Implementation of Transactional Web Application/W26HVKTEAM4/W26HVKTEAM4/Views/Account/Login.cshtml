@@ -1,0 +1,43 @@
+﻿@model W26HVKTEAM4.Models.Hvkuser
+
+@{
+    Layout = null;
+    ViewData["Title"] = "Login";
+}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="~/css/site.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=ADLaM+Display&display=swap" rel="stylesheet">
+</head>
+
+<div class="login-page">
+    <div class="login-card">
+        <h2>Login</h2>
+
+        <form asp-action="Login" method="post" class="login-form">
+            <div asp-validation-summary="ModelOnly" class="text-danger validation-summary"></div>
+
+            <div class="form-group">
+                <label asp-for="Email" class="form-label"></label>
+                <input asp-for="Email" class="form-input" placeholder="Enter your email" />
+                <span asp-validation-for="Email"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Password" class="form-label"></label>
+                <input asp-for="Password" type="password" class="form-input" placeholder="Enter your password" />
+                <span asp-validation-for="Password"></span>
+            </div>
+            <p>Don't have an account? @Html.ActionLink("Create One!", "Create","Customer")</p>
+            <button type="submit" class="login-btn">Login</button>
+        </form>
+
+        @if (ViewBag.Error != null)
+        {
+            <p class="text-danger login-error">@ViewBag.Error</p>
+        }
+    </div>
+</div>

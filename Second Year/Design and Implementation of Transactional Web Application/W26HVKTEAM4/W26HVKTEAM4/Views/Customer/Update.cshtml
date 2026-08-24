@@ -1,0 +1,15 @@
+﻿@model W26HVKTEAM4.Models.Hvkuser
+<main>
+    <h1>Update @Model.FirstName @Model.LastName</h1>
+    <div>        
+           <form asp-action="Update">
+                <input type="hidden" asp-for="HvkuserId" />
+                @await Html.PartialAsync("CustomerForm")
+                <div class="inputDiv">
+                    <input type="submit" id="submit" value="Save Changes" class="btn btn-primary" />
+                </div>
+           </form>
+
+        
+    </div>
+</main>

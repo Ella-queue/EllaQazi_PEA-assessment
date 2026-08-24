@@ -1,0 +1,40 @@
+﻿@model W26HVKTEAM4.Models.PetReservation
+@using W26HVKTEAM4.Models
+
+@{
+    ViewData["Title"] = "Add Pet to Reservation";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    IEnumerable<Pet> pets = ViewData["Pets"] as IEnumerable<Pet>;
+}
+
+<main>
+    <div>
+        <h2>Add Pet to Reservation</h2>
+       
+        <form asp-controller="PetReservation" asp-action="Create" method="post">
+            <input asp-for="ReservationId" type="hidden" />
+            <input type="hidden" name="customerId" value="@ViewData["CustomerId"]" />
+            <div asp-validation-summary="ModelOnly"></div>
+
+            <label asp-for="PetId">Pet</label>
+            <select class="dropdown-group" asp-for="PetId">
+                <option value="0">Select a Pet</option>
+                @foreach (Pet pet in pets)
+                {
+                    <option value="@pet.PetId">@pet.Name</option>
+                }
+            </select>
+            <span asp-validation-for="PetId"></span>
+
+            <button class="add-btn" type="submit" name="submitButton" value="Add Another Pet">Add Another Pet</button>
+            <button class="create-btn" type="submit" name="submitButton" value="Finish">Finish</button>
+            <a asp-controller="Reservation"
+               asp-action="Index"
+               class="remove-pet-service-btn">
+                Cancel
+            </a>
+        </form>
+    </div>
+</main>
+

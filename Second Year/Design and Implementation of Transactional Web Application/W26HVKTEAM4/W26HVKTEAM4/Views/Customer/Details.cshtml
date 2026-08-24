@@ -1,0 +1,60 @@
+﻿@model W26HVKTEAM4.Models.Hvkuser
+
+@{
+    string addressStr = "";
+
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<main>
+    
+    <h2>@Html.DisplayFor(model => model.FirstName) @Html.DisplayFor(model => model.LastName)</h2>
+    <div class="customerCard">
+        <h3>Personal Information</h3>
+        <p>@Html.DisplayNameFor(model => model.Email): @Html.DisplayFor(model => model.Email)</p>
+
+        <p>Phone Number: @Html.DisplayFor(model => model.Phone)</p>
+
+        <p>Cell Phone Number: @Html.DisplayFor(model => model.CellPhone)</p>
+
+        <p>@Html.DisplayNameFor(model => model.Password): @Html.DisplayFor(model => model.Password)</p>
+        <p>Address: 
+            @if (Model.Street != null)
+            {
+                addressStr += Model.Street;    
+            }
+            @if (Model.City != null)
+            {
+                addressStr += " ,"+Model.City;
+            }
+            @if (Model.Province != null)
+            {
+                addressStr += " ," + Model.Province;
+            }
+            @if (Model.PostalCode != null)
+            {
+                addressStr += " ("+ Model.PostalCode + ")";
+            }
+            @if(addressStr == "")
+            {
+                addressStr = "N/A";    
+            }
+            @addressStr
+         </p>
+        
+        <h3>Emergency Contact</h3>
+        <p>@Html.DisplayFor(model => model.EmergencyContactFirstName) @Html.DisplayFor(model => model.EmergencyContactLastName)</p>
+        <p>Cell Phone: @Html.DisplayFor(model => model.EmergencyContactPhone)</p>
+
+        <h3><a asp-controller="Pet" asp-action="Index" asp-route-id="@Model.HvkuserId" asp-route-userType="@ViewBag.User">See Your Pets!</a></h3>
+        <br />
+        <a asp-action="Update" asp-route-id="@Model.HvkuserId">Edit Customer Information</a>
+        <a asp-action="Delete" asp-route-id="@Model.HvkuserId">Delete Account</a>
+        <br />
+        @if (ViewBag.User == "Employee")
+        {
+            <a asp-action="Index">Back to List</a>
+        }
+    </div>   
+</main>

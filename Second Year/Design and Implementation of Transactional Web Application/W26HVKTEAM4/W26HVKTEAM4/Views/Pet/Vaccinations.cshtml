@@ -1,0 +1,56 @@
+﻿@model IEnumerable<W26HVKTEAM4.Models.PetVaccination>
+
+@{
+    ViewData["Title"] = "Vaccination Records";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var customer = ViewBag.OwnerId;
+    ViewData["CurrentlyLoggedInUser"] = customer;
+}
+<main>
+    <h1>Vaccination Records for @ViewBag.PetName</h1>
+
+    <form asp-action="Vaccinations" method="post">
+        <input type="hidden" name="PetId" value="@Model.FirstOrDefault()?.PetId" />
+
+        <table class="table table-striped">
+            <tr>
+                <th>Vaccine Name</th>
+                <th>Expiration Date</th>
+                <th>Checked Status</th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Vaccination.Name)</td>
+
+                    <td>
+                        <input type="hidden" name="VaccinationKeys" value="@item.VaccinationId" />
+                        <input type="date" name="ExpiryDates_@(item.VaccinationId)"
+                               value="@item.ExpiryDate.ToString("yyyy-MM-dd")" class="form-control" />
+                    </td>
+
+                    <td>
+                        @if (Context.Session.GetString("UserType")?.ToLower() == "employee")
+                        {
+                            <label>
+                                <input type="checkbox" name="Verified_@(item.VaccinationId)" value="true" @(item.VaccinationChecked ? "checked" : "") />
+                                Verified
+                            </label>
+                        }
+                        else
+                        {
+                            <span style="color: @(item.VaccinationChecked ? "green" : "orange");">
+                                @(item.VaccinationChecked ? "Verified" : "Pending")
+                            </span>
+                        }
+                    </td>
+                </tr>
+            }
+        </table>
+
+        <div>
+            <input type="submit" value="Save Updates" class="btn btn-primary" />
+            <button type="button" onclick="location.href='@Url.Action("Index", new { id = ViewBag.OwnerId })'" class="btn btn-secondary">Back to Pets</button>
+        </div>
+    </form>
+</main>

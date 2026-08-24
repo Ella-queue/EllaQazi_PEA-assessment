@@ -1,0 +1,58 @@
+﻿@model W26HVKTEAM4.Models.Reservation
+@using W26HVKTEAM4.Models
+
+@{
+    ViewData["Title"] = "Create Reservation";
+    var customers = ViewData["Customers"] as IEnumerable<Hvkuser>;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var today = DateTime.Now.ToString("yyyy-MM-dd");
+}
+
+<main class="create-reservation-page">
+    <div class="create-reservation-card">
+        <h2>Reservation</h2>
+        <h3>Select your start and end dates</h3>
+
+        <form asp-controller="Reservation" asp-action="Create" method="post">
+            @if (customers != null)
+            {
+                <div class="form-row">
+                    <label for="customerId">Customer</label>
+                    <select name="customerId" id="customerId">
+                        <option value="0">Select Customer</option>
+                        @foreach (var customer in customers)
+                        {
+                            <option value="@customer.HvkuserId">
+                                @customer.FirstName @customer.LastName
+                            </option>
+                        }
+                    </select>
+                </div>
+            }
+
+            <div class="date-container">
+                <div class="date-group">
+                    <label asp-for="StartDate"></label>
+                    <input asp-for="StartDate" type="date" min="@today" value="@today" class="date-input" />
+                    <span asp-validation-for="StartDate" class="text-danger"></span>
+                </div>
+
+                <div class="date-group">
+                    <label asp-for="EndDate"></label>
+                    <input asp-for="EndDate" type="date" min="@today" value="@today" class="date-input" />
+                    <span asp-validation-for="EndDate" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="button-row">
+                <input class="create-btn" type="submit" value="Create Reservation" />
+
+                <a asp-controller="Reservation"
+                   asp-action="Index"
+                   class="delete-btn">
+                    Cancel
+                </a>
+            </div>
+        </form>
+    </div>
+</main>

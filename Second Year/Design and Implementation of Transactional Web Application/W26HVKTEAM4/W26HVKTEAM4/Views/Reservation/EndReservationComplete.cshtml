@@ -1,0 +1,19 @@
+﻿@model W26HVKTEAM4.Models.Reservation
+@{
+    ViewData["Title"] = "Checkout Complete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<main>
+    <div>
+        
+
+        <h2>Check-out Complete!</h2>
+        @if (Context.Session.GetString("UserType")?.ToLower() == "employee")
+        {
+            @Html.ActionLink("Return To Home Page", "Employee", "Home", null, new { title = "Return to the Home Page" })  
+        }
+        else{
+            @Html.ActionLink("Return To Home Page", "Customer", "Home", null, new { title = "Return to the Home Page" })
+        }
+    </div>
+</main>

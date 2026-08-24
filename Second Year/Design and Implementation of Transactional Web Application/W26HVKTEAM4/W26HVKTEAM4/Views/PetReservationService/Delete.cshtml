@@ -1,0 +1,35 @@
+﻿@model W26HVKTEAM4.Models.PetReservationService
+
+@{
+    ViewData["Title"] = "Remove Service";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<main>
+    <div>
+        <h2>Remove Service</h2>
+
+        <p>Are you sure you want to remove this service from the pet?</p>
+
+        <p>
+            <strong>Pet:</strong> @Model.PetReservation.Pet.Name
+        </p>
+
+        <p>
+            <strong>Service:</strong> @Model.Service.ServiceDescription
+        </p>
+
+        <form asp-action="Delete" method="post">
+            <input type="hidden" name="petReservationId" value="@Model.PetReservationId" />
+            <input type="hidden" name="serviceId" value="@Model.ServiceId" />
+
+            <button class="delete-btn" type="submit">Yes, Remove</button>
+            <a asp-controller="Reservation"
+               asp-action="Edit"
+               asp-route-id="@Model.PetReservation.ReservationId"
+               class="remove-pet-service-btn">
+                Cancel
+            </a>
+        </form>
+    </div>
+</main>

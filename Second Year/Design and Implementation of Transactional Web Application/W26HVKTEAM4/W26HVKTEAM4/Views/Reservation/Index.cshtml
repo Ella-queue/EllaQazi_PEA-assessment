@@ -1,0 +1,99 @@
+﻿@model IEnumerable<W26HVKTEAM4.Models.Reservation>
+
+@{
+    ViewData["Title"] = "Reservation";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<main>
+    <h2> Reservations</h2>
+    <h3>Welcome to the Reservation's page, here you can view, edit and delete reservations</h3>
+    <form asp-controller="Reservation" asp-action="Create" method="get">
+        <button type="submit" class="btn-primary create-btn">
+            + Create Reservation
+        </button>
+    </form>
+
+    <section id="reservation-list">
+        @foreach (var item in Model)
+        {
+            <div class="list-reservation-div">
+                @{
+                    var today = DateOnly.FromDateTime(DateTime.Today);
+
+                    string statusText;
+                    string statusClass;
+
+                    if (item.EndDate < today)
+                    {
+                        statusText = "Reservation Passed";
+                        statusClass = "status-passed";
+                    }
+                    else if (item.StartDate > today)
+                    {
+                        statusText = "Upcoming Reservation";
+                        statusClass = "status-upcoming";
+                    }
+                    else
+                    {
+                        statusText = "Reservation In Progress";
+                        statusClass = "status-active";
+                    }
+                }
+                <h2 class="reservation-status @statusClass">@statusText</h2>
+                @{
+                    var owner = item.PetReservations?
+                    .FirstOrDefault()?
+                    .Pet?
+                    .Hvkuser;
+
+                    var ownerName = owner != null
+                    ? owner.FirstName + " " + owner.LastName
+                    : "Unknown Customer";
+                }
+
+                <h4 class="reservation-owner">@ownerName</h4>
+                <h3>@item.StartDate - @item.EndDate</h3>
+
+                <h3>Pets:</h3>
+
+                @if (item.PetReservations != null && item.PetReservations.Any())
+                {
+                    <ul>
+                        @foreach (var petRes in item.PetReservations)
+                        {
+                            <li>
+                                <h4>@petRes.Pet.Name</h4>
+
+                                <p>Services:</p>
+
+                                @if (petRes.PetReservationServices != null && petRes.PetReservationServices.Any())
+                                {
+                                    <ul>
+                                        @foreach (var service in petRes.PetReservationServices)
+                                        {
+                                            <li>
+                                                <p>@service.Service.ServiceDescription</p>
+                                            </li>
+                                        }
+                                    </ul>
+                                }
+                                else
+                                {
+                                    <p>No services selected.</p>
+                                }
+                            </li>
+                        }
+                    </ul>
+                }
+                else
+                {
+                    <p>No pets have been added to this reservation yet.</p>
+                }
+
+                @Html.ActionLink("Edit", "Edit", "Reservation", new { id = item.ReservationId }, new { @class = "edit-btn" })
+                @Html.ActionLink("Delete", "Delete", "Reservation", new { id = item.ReservationId }, new { @class = "delete-btn" })
+            </div>
+        }
+    </section>
+</main>

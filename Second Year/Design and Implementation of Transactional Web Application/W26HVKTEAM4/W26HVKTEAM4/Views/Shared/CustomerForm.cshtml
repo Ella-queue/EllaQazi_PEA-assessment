@@ -1,0 +1,99 @@
+﻿@model W26HVKTEAM4.Models.Hvkuser
+
+
+<div class="customerFormDiv">
+    <div id="personalInfo">
+        <div class="inputDiv">
+            <h2>Personal Information</h2>
+        </div>
+
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="inputDiv">
+            <label asp-for="FirstName" class="control-label"></label>
+            <input asp-for="FirstName" class="form-control" />
+            <span asp-validation-for="FirstName" class="text-danger"></span>
+
+            <label asp-for="LastName" class="control-label"></label>
+            <input asp-for="LastName" class="form-control" />
+            <span asp-validation-for="LastName" class="text-danger"></span>
+
+        </div>
+        <div class="inputDiv">
+            <label asp-for="Email" class="control-label"></label>
+            <input asp-for="Email" class="form-control" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+        <div class="inputDiv">
+            <label asp-for="Phone" class="control-label"></label>
+            <input asp-for="Phone" class="form-control" />
+            <span asp-validation-for="Phone" class="text-danger"></span>
+
+            <label asp-for="CellPhone" class="control-label"></label>
+            <input asp-for="CellPhone" class="form-control" />
+            <span asp-validation-for="CellPhone" class="text-danger"></span>
+        </div>
+        <div class="inputDiv">
+            <label asp-for="Street" class="control-label"></label>
+            <input asp-for="Street" class="form-control" />
+            <span asp-validation-for="Street" class="text-danger"></span>
+
+            <label asp-for="PostalCode" class="control-label"></label>
+            <input asp-for="PostalCode" class="form-control" />
+            <span asp-validation-for="PostalCode" class="text-danger"></span>
+        </div>
+        <div class="inputDiv">
+            <label asp-for="City" class="control-label"></label>
+            <input asp-for="City" class="form-control" />
+            <span asp-validation-for="City" class="text-danger"></span>
+
+            <label asp-for="Province" class="control-label"></label>
+            <select asp-for="Province">
+                <option value="">Select a Province</option>
+                <option value="ON">Ontario</option>
+                <option value="QC">Quebec</option>
+            </select>
+            <span asp-validation-for="Province" class="text-danger"></span>
+        </div>
+        <div class="inputDiv">
+            <label asp-for="Password" class="control-label"></label>
+            <input asp-for="Password" class="form-control" />
+            <span asp-validation-for="Password" class="text-danger"></span>
+
+            <label asp-for="ConfirmPassword" class="control-label"></label>
+            <input asp-for="ConfirmPassword" class="form-control" />
+            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+        </div>
+        <div class="inputDiv">
+            <label asp-for="UserType" class="control-label"></label>
+            <br />
+            <input asp-for="UserType" type="radio" id="Employee" value="Employee" />
+            <label for="Employee">Employee</label>
+            <input asp-for="UserType" type="radio" id="Customer" value="Customer" />
+            <label for="Customer">Customer</label>
+            <span asp-validation-for="UserType" class="text-danger"></span>
+        </div>
+        
+    </div>
+    <div id="emergencyContact">
+        <div class="inputDiv">
+            <h2>Emergency Contact</h2>
+        </div>
+        <div class="inputDiv">
+            <label asp-for="EmergencyContactFirstName" class="control-label"></label>
+            <input asp-for="EmergencyContactFirstName" class="form-control" />
+            <span asp-validation-for="EmergencyContactFirstName" class="text-danger"></span>
+        </div>
+        <div class="inputDiv">
+
+            <label asp-for="EmergencyContactLastName" class="control-label"></label>
+            <input asp-for="EmergencyContactLastName" class="form-control" />
+            <span asp-validation-for="EmergencyContactLastName" class="text-danger"></span>
+        </div>
+        <div class="inputDiv">
+            <label asp-for="EmergencyContactPhone" class="control-label"></label>
+            <input asp-for="EmergencyContactPhone" class="form-control" />
+            <span asp-validation-for="EmergencyContactPhone" class="text-danger"></span>
+
+        </div>
+    </div>
+</div>

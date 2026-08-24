@@ -1,0 +1,109 @@
+﻿@model W26HVKTEAM4.Models.Reservation
+
+@{
+    ViewData["Title"] = "Edit Reservation";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<main class="edit-reservation-page">
+    <section class="edit-card">
+        <h2>Edit Reservation</h2>
+
+        <form asp-action="Edit" method="post" class="date-form">
+            <input asp-for="ReservationId" type="hidden" />
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="date-fields">
+                <div>
+                    <label asp-for="StartDate">Start Date</label>
+                    <input asp-for="StartDate" type="date" />
+                    <span asp-validation-for="StartDate" class="text-danger"></span>
+                </div>
+
+                <div>
+                    <label asp-for="EndDate">End Date</label>
+                    <input asp-for="EndDate" type="date" />
+                    <span asp-validation-for="EndDate" class="text-danger"></span>
+                </div>
+            </div>
+
+            <button class="add-btn" type="submit">Save Date Changes</button>
+        </form>
+    </section>
+
+    <section class="edit-card">
+        <div class="pets-header">
+            <h2>Pets in Reservation</h2>
+
+            <a asp-controller="PetReservation"
+               asp-action="Create"
+               asp-route-reservationId="@Model.ReservationId"
+               class="create-btn">
+                Add Another Pet
+            </a>
+        </div>
+
+        @if (Model.PetReservations != null && Model.PetReservations.Count > 0)
+        {
+            foreach (var pr in Model.PetReservations)
+            {
+                <div class="clean-pet-card">
+                    <div class="pet-top-row">
+                        <h2>@pr.Pet.Name</h2>
+                        <h3>Size: @pr.Pet.DogSize, Breed: @pr.Pet.Breed</h3>
+                       
+                        <div class="pet-button-row">
+                            <a asp-controller="PetReservation"
+                               asp-action="Delete"
+                               asp-route-id="@pr.PetReservationId"
+                               class="remove-pet-service-btn">
+                                Remove Pet
+                            </a>
+
+                            <a asp-controller="PetReservationService"
+                               asp-action="Create"
+                               asp-route-petReservationId="@pr.PetReservationId"
+                               asp-route-reservationId="@Model.ReservationId"
+                               class="add-service-btn">
+                                Add Service
+                            </a>
+                        </div>
+                    </div>
+
+                    <h3>Services</h3>
+
+                    @if (pr.PetReservationServices != null && pr.PetReservationServices.Count > 0)
+                    {
+                        <div class="service-grid">
+                            @foreach (var service in pr.PetReservationServices)
+                            {
+                                <div class="service-row">
+                                    <span>@service.Service.ServiceDescription</span>
+
+                                    <a asp-controller="PetReservationService"
+                                       asp-action="Delete"
+                                       asp-route-petReservationId="@service.PetReservationId"
+                                       asp-route-serviceId="@service.ServiceId"
+                                       class="remove-service-btn">
+                                        Remove Service
+                                    </a>
+                                </div>
+                            }
+                        </div>
+                    }
+                    else
+                    {
+                        <p class="empty-text">No services added.</p>
+                    }
+                </div>
+            }
+        }
+        else
+        {
+            <p class="empty-text">No pets added yet.</p>
+        }
+    </section>
+
+    <a asp-action="Index" class="finish-btn">Finish</a>
+</main>

@@ -1,0 +1,14 @@
+﻿@model W26HVKTEAM4.Models.PetReservation
+
+@{
+    IEnumerable<Pet> pets = Model.Pet.Hvkuser.Pets;
+}
+
+<div>
+    <select asp-for="@Model.Pet">
+        @foreach (var pet in pets)
+        {
+            <option asp-for="@Model.Pet" value="@pet" id="@pet">@pet</option>
+        }
+    </select>
+</div>

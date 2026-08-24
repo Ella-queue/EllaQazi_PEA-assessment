@@ -1,0 +1,42 @@
+﻿@model W26HVKTEAM4.Models.PetReservationService
+@using W26HVKTEAM4.Models
+
+@{
+    ViewData["Title"] = "Add Service";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    IEnumerable<Service> services = ViewData["Services"] as IEnumerable<Service>;
+    string petName = ViewData["PetName"] as string ?? "Pet";
+}
+
+<main>
+    <div>
+        <h2>Add Service</h2>
+        <p>Pet: @petName</p>
+
+        <form asp-action="Create" method="post">
+            <input type="hidden" name="reservationId" value="@ViewData["ReservationId"]" />
+            <input asp-for="PetReservationId" type="hidden" />
+
+            <div asp-validation-summary="ModelOnly"></div>
+
+            <label asp-for="ServiceId">Service</label>
+            <select asp-for="ServiceId">
+                <option value="0">Select a Service</option>
+                @foreach (var service in services)
+                {
+                    <option value="@service.ServiceId">@service.ServiceDescription</option>
+                }
+            </select>
+            <span asp-validation-for="ServiceId"></span>
+
+            <br /><br />
+
+            <button class="add-service-btn" type="submit" name="submitButton" value="Add Another Service">Add Another Service</button>
+            <button class="finish-btn" type="submit" name="submitButton" value="Finish">Finish</button>
+
+            <button class="delete-btn">@Html.ActionLink("Cancel", "Index", "Reservation")</button>
+        </form>
+    </div>
+</main>
+

@@ -1,0 +1,123 @@
+﻿@model IEnumerable<W26HVKTEAM4.Models.Reservation>
+
+@{
+    ViewData["Title"] = "Employee Home";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var currentDate = DateOnly.FromDateTime(DateTime.Now);
+
+    IEnumerable<W26HVKTEAM4.Models.Reservation> startingToday = Model.Where(r => r.StartDate == currentDate && r.Status <= 2).OrderBy(r => r.StartDate);
+    IEnumerable<W26HVKTEAM4.Models.Reservation> endingToday = Model.Where(r => r.EndDate == currentDate && r.Status == 3).OrderBy(r => r.StartDate);
+    IEnumerable<W26HVKTEAM4.Models.Reservation> current = Model.Where(r => r.Status == 3).OrderBy(r => r.StartDate);
+}
+
+<main>
+    <div id="search-div">
+        <h3>Search Customer</h3>
+        <form asp-controller="Customer" asp-action="Index" method="get">
+            <label for="search">Search</label>
+            <input id="search" name="search" />
+            <input type="submit" value="Search" />
+        </form>
+    </div>
+
+    <div id="tables-employee-home">
+        <h2>Hello, @ViewBag.UserName</h2>
+
+        <div class="table-div" id="start-end-table-div">
+            <h3>Reservations Starting Today</h3>
+            <table>
+                <tr>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Customer Name</th>
+                    <th>Customer Email</th>
+                    <th>Customer Cellphone</th>
+                    <th>Pets</th>
+                    <th>Action</th>
+                </tr>
+                @foreach (var reservation in startingToday)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => reservation.StartDate)</td>
+                        <td>@Html.DisplayFor(modelItem => reservation.EndDate)</td>
+                        <td><a asp-controller="Customer" asp-action="Details" asp-route-id="@reservation.PetReservations.First().Pet.HvkuserId" asp-route-userType="Employee">@Html.DisplayFor(modelItem => reservation.PetReservations.First().Pet.Hvkuser.FirstName) @Html.DisplayFor(modelItem => reservation.PetReservations.First().Pet.Hvkuser.LastName)</a></td>
+                        <td>@Html.DisplayFor(modelItem => reservation.PetReservations.First().Pet.Hvkuser.Email)</td>
+                        <td>@Html.DisplayFor(modelItem => reservation.PetReservations.First().Pet.Hvkuser.CellPhone)</td>
+                        <td>
+                            @foreach (var petRes in reservation.PetReservations)
+                            {
+                                <span>@Html.DisplayFor(modelItem => petRes.Pet.Name), </span>
+                            }
+                        </td>
+                        <td>
+                            <a asp-controller="Reservation" asp-action="StartVisit" asp-route-id="@reservation.ReservationId" class="btn btn-primary">Start Visit</a>
+                        </td>
+                    </tr>
+                }
+            </table>
+
+            <h3>Reservations Ending Today</h3>
+            <table>
+                <tr>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Customer Name</th>
+                    <th>Customer Email</th>
+                    <th>Customer Cellphone</th>
+                    <th>Pets</th>
+                    <th>Action</th>
+                </tr>
+                @foreach (var reservation in endingToday)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => reservation.StartDate)</td>
+                        <td>@Html.DisplayFor(modelItem => reservation.EndDate)</td>
+                        <td><a asp-controller="Customer" asp-action="Details" asp-route-id="@reservation.PetReservations.First().Pet.HvkuserId" asp-route-userType="Employee">@Html.DisplayFor(modelItem => reservation.PetReservations.First().Pet.Hvkuser.FirstName) @Html.DisplayFor(modelItem => reservation.PetReservations.First().Pet.Hvkuser.LastName)</a></td>
+                        <td>@Html.DisplayFor(modelItem => reservation.PetReservations.First().Pet.Hvkuser.Email)</td>
+                        <td>@Html.DisplayFor(modelItem => reservation.PetReservations.First().Pet.Hvkuser.CellPhone)</td>
+                        <td>
+                            @foreach (var petRes in reservation.PetReservations)
+                            {
+                                <span>@Html.DisplayFor(modelItem => petRes.Pet.Name), </span>
+                            }
+                        </td>
+                        <td>
+                            <a asp-controller="PetReservation" asp-action="EndPetVisit" asp-route-id="@reservation.ReservationId" class="btn btn-secondary">End Reservation</a>
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+
+        <div class="table-div">
+            <h3>Current Reservations</h3>
+            <table>
+                <tr>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Customer Name</th>
+                    <th>Customer Email</th>
+                    <th>Customer Cellphone</th>
+                    <th>Pets</th>
+                </tr>
+                @foreach (var reservation in current)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => reservation.StartDate)</td>
+                        <td>@Html.DisplayFor(modelItem => reservation.EndDate)</td>
+                        <td><a asp-controller="Customer" asp-action="Details" asp-route-id="@reservation.PetReservations.First().Pet.HvkuserId" asp-route-userType="Employee">@Html.DisplayFor(modelItem => reservation.PetReservations.First().Pet.Hvkuser.FirstName) @Html.DisplayFor(modelItem => reservation.PetReservations.First().Pet.Hvkuser.LastName)</a></td>
+                        <td>@Html.DisplayFor(modelItem => reservation.PetReservations.First().Pet.Hvkuser.Email)</td>
+                        <td>@Html.DisplayFor(modelItem => reservation.PetReservations.First().Pet.Hvkuser.CellPhone)</td>
+                        <td>
+                            @foreach (var petRes in reservation.PetReservations)
+                            {
+                                <span>@Html.DisplayFor(modelItem => petRes.Pet.Name), </span>
+                            }
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+</main>

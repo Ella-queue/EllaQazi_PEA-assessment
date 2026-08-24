@@ -1,0 +1,762 @@
+﻿:root {
+    --bg-main: #CEE8F5;
+    --light-accent: #F4FAFD;
+    --dark-accent: #4B74B3;
+    --darker-accent: #4F57A1;
+    --dark-font: #313477;
+    --light-font: #FFFFFF;
+}
+
+* {
+    font-family: "ADLaM Display";
+}
+
+body {
+    background-color: var(--bg-main);
+    color: var(--dark-font);
+    margin: 0;
+}
+
+h1 {
+    font-size: 2.5em;
+}
+
+header {
+    background-color: var(--light-accent);
+    text-align: center;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    margin: 0;
+    img
+
+{
+    width: 100px;
+    margin: 10px 0px 0px 50px;
+}
+
+}
+
+#imagesTitle {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+}
+
+#iconDiv {
+    img
+
+{
+    margin-top: 20px;
+    width: 60px;
+}
+
+p {
+    margin: -2.5px 0px 0px 50px;
+}
+
+}
+
+nav {
+    background-color: var(--dark-accent);
+    text-align: center;
+    padding: 10px 0px 10px 0px;
+    a
+
+{
+    background-color: var(--dark-accent);
+    color: var(--light-font);
+    text-decoration: none;
+    padding: .5em 1em;
+    font-size: 1.2em;
+    font-weight: bold;
+    letter-spacing: 1.25px;
+    padding-inline: 4vw;
+}
+
+a:hover {
+    background-color: var(--darker-accent);
+}
+
+}
+
+h2 {
+    font-size: 1.75em;
+}
+
+main {
+    text-align: center;
+    margin: 175px 200px 100px 200px;
+    div
+
+{
+    background-color: var(--light-accent);
+    text-align: left;
+    padding: 15px 15px 15px 35px;
+    border: 5px solid var(--dark-accent);
+    border-radius: 15px;
+    margin-top: 15px;
+}
+
+}
+
+div {
+    table
+
+{
+    margin-left: -10px;
+}
+
+}
+
+table {
+    background-color: var(--dark-accent);
+    border-collapse: collapse;
+    border: 8px solid var(--dark-accent);
+    border-collapse: collapse;
+    width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+th {
+    background-color: var(--dark-accent);
+    color: var(--light-font);
+}
+
+td {
+    background-color: var(--light-font);
+}
+
+th, td {
+    border: 2px solid Var(--dark-accent);
+    padding: 5px;
+}
+
+footer {
+    background-color: var(--dark-accent);
+    color: var(--light-font);
+    text-align: center;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    padding: 10px 0px 20px 0px;
+}
+
+.customerCard {
+    margin: auto;
+    text-align: center;
+}
+
+@media (max-width: 1200px) {
+    nav {
+        a
+
+{
+    font-size: 1em;
+    padding-inline: 3vw;
+}
+
+}
+}
+
+@media (max-width: 992px) {
+    nav {
+        a
+
+{
+    font-size: 1em;
+    padding: .5em 2em;
+    padding-inline: 3vw;
+}
+
+}
+
+h1 {
+    font-size: 2em;
+}
+
+main {
+    margin: 175px 150px 100px 150px;
+}
+
+}
+
+@media (max-width: 768px) {
+    nav {
+        a
+
+{
+    font-size: 1em;
+    padding: .5em 0.8em;
+    padding-inline: 0.8vw;
+}
+
+}
+
+h1 {
+    font-size: 1.8em;
+}
+
+header {
+    img
+
+{
+    margin-top: 25px;
+    width: 100px;
+}
+
+}
+
+#logoHVK {
+    margin-left: 8px;
+    margin-right: 20px;
+}
+
+main {
+    margin: 175px 100px 100px 100px;
+}
+
+}
+
+.login-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 220px;
+    margin-bottom: 120px;
+    padding: 20px;
+}
+
+.login-card {
+    background-color: var(--light-accent);
+    border: 5px solid var(--dark-accent);
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(49, 52, 119, 0.15);
+    width: 100%;
+    max-width: 500px;
+    padding: 35px 40px;
+    text-align: left;
+}
+
+    .login-card h2 {
+        text-align: center;
+        color: var(--dark-font);
+        margin-top: 0;
+        margin-bottom: 30px;
+        font-size: 2em;
+    }
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-label {
+    font-size: 1.1em;
+    margin-bottom: 8px;
+    color: var(--dark-font);
+}
+
+.form-input {
+    padding: 12px 15px;
+    border: 3px solid var(--dark-accent);
+    border-radius: 12px;
+    font-size: 1em;
+    background-color: white;
+    color: var(--dark-font);
+    outline: none;
+    transition: 0.2s ease-in-out;
+}
+
+    .form-input:focus {
+        border-color: var(--darker-accent);
+        box-shadow: 0 0 0 3px rgba(79, 87, 161, 0.15);
+    }
+
+.login-btn {
+    background-color: var(--dark-accent);
+    color: var(--light-font);
+    border: none;
+    border-radius: 12px;
+    padding: 14px;
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+    margin-top: 10px;
+}
+
+    .login-btn:hover {
+        background-color: var(--darker-accent);
+        transform: translateY(-1px);
+    }
+
+.field-error {
+    margin-top: 6px;
+    font-size: 0.9em;
+}
+
+.validation-summary,
+.login-error {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 0.95em;
+}
+
+.text-danger,
+.field-validation-error,
+.validation-summary-errors {
+    color: rgb(255, 0, 0) !important;
+}
+
+.inputDiv {
+    border: none;
+    border-radius: 0px;
+    padding: 5px;
+    text-align: center;
+    background-color: none;
+}
+
+    .inputDiv input {
+        margin-inline-end: 15px;
+        background-color: none;
+    }
+
+.customerFormDiv {
+    border: none;
+    border-radius: 0px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+}
+
+#personalInfo {
+    grid-column: 0;
+    border: none;
+    border-radius: 0px;
+    border-inline-end: 5px solid var(--dark-accent);
+    padding: 0px;
+    background-color: none;
+}
+
+#emergencyContact {
+    grid-column: 2;
+    grid-column: 0;
+    border: none;
+    border-radius: 0px;
+    border-inline-start: 5px solid var(--dark-accent);
+    padding: 0px;
+    background-color: none;
+}
+
+    .inputDiv input {
+        margin-inline-end: 5px;
+    }
+.reservation-status {
+    font-weight: bold;
+    margin-bottom: 5px;
+    font-size: 1.5em;
+}
+.reservation-status {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 8px;
+    font-size: 1.5em;
+}
+
+.status-active {
+    background-color: #eafaf1;
+    color: green;
+}
+
+.status-upcoming {
+    background-color: #e8f1fd;
+    color: deepskyblue;
+}
+
+.status-passed {
+    background-color: #f2f2f2;
+    color: gray;
+}
+.reservation-owner {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: var(--dark-accent);
+    margin-bottom: 5px;
+}
+.create-btn {
+    margin: 20px 0;
+    padding: 12px 22px;
+    font-size: 1.1em;
+    font-weight: bold;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    background-color: var(--dark-accent);
+    color: var(--light-font);
+    transition: all 0.2s ease-in-out;
+}
+
+    
+    .create-btn:hover {
+        background-color: var(--darker-accent);
+        transform: translateY(-2px);
+    }
+
+    
+    .create-btn:active {
+        transform: translateY(0);
+    }
+.delete-btn {
+    margin: 20px 0;
+    padding: 12px 22px;
+    font-size: 1em;
+    font-weight: bold;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    background-color: red;
+    color: var(--light-font);
+    transition: all 0.2s ease-in-out;
+}
+.edit-btn {
+    margin: 20px 0;
+    padding: 12px 22px;
+    font-size: 1em;
+    font-weight: bold;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    background-color: brown;
+    color: var(--light-font);
+    transition: all 0.2s ease-in-out;
+}
+.add-btn {
+    margin: 20px 0;
+    padding: 12px 22px;
+    font-size: 1em;
+    font-weight: bold;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    background-color: forestgreen;
+    color: var(--light-font);
+    transition: all 0.2s ease-in-out;
+}
+.remove-pet-service-btn {
+    margin: 10px 0;
+    padding: 10px 10px;
+    font-size: 0.9em;
+    font-weight: bold;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    background-color: darkmagenta;
+    color: var(--light-font);
+    transition: all 0.2s ease-in-out;
+}
+.add-service-btn {
+    margin: 10px 0;
+    padding: 10px 10px;
+    font-size: 0.9em;
+    font-weight: bold;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    background-color: forestgreen;
+    color: var(--light-font);
+    transition: all 0.2s ease-in-out;
+}
+.edit-reservation-page {
+    max-width: 1100px;
+    margin: 175px auto 120px auto;
+}
+
+.edit-card {
+    background-color: var(--light-accent);
+    border: 2px solid var(--dark-accent);
+    border-radius: 18px;
+    padding: 25px 35px;
+    margin-bottom: 25px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.date-form {
+    text-align: center;
+}
+
+.date-fields {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 15px;
+    padding: 10px;
+    border: none;
+}
+
+    .date-fields div {
+        border: none;
+        background: transparent;
+        padding: 0;
+        margin: 0;
+    }
+
+    .date-fields label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+
+    .date-fields input {
+        padding: 8px;
+        border: 2px solid var(--dark-accent);
+        border-radius: 8px;
+    }
+
+.pets-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: none;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}
+
+.clean-pet-card {
+    background-color: white;
+    border: 2px solid var(--dark-accent);
+    border-radius: 15px;
+    padding: 20px;
+    margin-top: 20px;
+    text-align: left;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
+}
+
+.pet-top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f8fbff;
+    border: none;
+    border-bottom: 1px solid #d6e3f5;
+    border-radius: 10px 10px 0 0;
+    padding: 20px;
+    margin-bottom: 15px;
+}
+
+    .pet-top-row h4 {
+        font-size: 1.3em;
+        margin: 0;
+    }
+
+.pet-button-row {
+    display: flex;
+    gap: 10px;
+    border: none;
+    background: transparent;
+    padding: 0;
+    margin: 0;
+}
+
+.add-service-btn,
+.remove-pet-service-btn,
+.remove-service-btn,
+.finish-btn {
+    display: inline-block;
+    text-decoration: none;
+    color: var(--light-font);
+}
+
+.service-grid {
+    margin-top: 10px;
+    padding: 0;
+    border: none;
+}
+
+.service-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f8fbff;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 15px;
+    margin-bottom: 8px;
+}
+
+.remove-service-btn {
+    background-color: red;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 0.85em;
+    font-weight: bold;
+    margin-left: auto;
+}
+
+.empty-text {
+    text-align: center;
+    font-style: italic;
+}
+
+.finish-btn {
+    background-color: var(--dark-accent);
+    padding: 14px 30px;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+    .finish-btn:hover {
+        background-color: var(--darker-accent);
+    }
+select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    padding: 10px 40px 10px 15px;
+    font-size: 1em;
+    border: 2px solid var(--dark-accent);
+    border-radius: 10px;
+    background-color: white;
+    color: var(--dark-font);
+    cursor: pointer;
+    outline: none;
+   
+   
+}
+
+   
+    select:hover {
+        border-color: var(--darker-accent);
+    }
+
+    select:focus {
+        border-color: var(--darker-accent);
+        box-shadow: 0 0 0 3px rgba(79, 87, 161, 0.2);
+    }
+.dropdown-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+    .dropdown-group label {
+        font-weight: bold;
+    }
+
+#reservation-list {
+    margin-top: 25px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+    align-items: start;
+}
+
+.list-reservation-div {
+    width: auto;
+    max-width: none;
+    margin: 0;
+    padding: 22px 28px;
+    border: 2px solid var(--dark-accent);
+    border-radius: 15px;
+    background-color: var(--light-accent);
+    text-align: left;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+    .list-reservation-div h2,
+    .list-reservation-div h3,
+    .list-reservation-div h4,
+    .list-reservation-div p {
+        margin: 6px 0;
+    }
+
+    .list-reservation-div ul {
+        margin: 5px 0 8px 18px;
+        margin-bottom: 4px;
+        padding-left: 15px;
+    }
+
+    .list-reservation-div li {
+        margin-bottom: 4px;
+    }
+
+.reservation-status {
+    font-size: 1em;
+    padding: 6px 12px;
+    margin-bottom: 12px;
+}
+
+.reservation-owner {
+    font-size: 1.1em;
+    margin-top: 10px;
+}
+
+.list-reservation-div > h3 {
+    font-size: 1.05em;
+}
+
+.list-reservation-div li h4 {
+    font-size: 1em;
+    margin-top: 8px;
+}
+
+.list-reservation-div li p {
+    font-size: 0.95em;
+}
+
+.list-reservation-div .edit-btn,
+.list-reservation-div .delete-btn {
+    display: inline-block;
+    margin: 12px 5px 0 0;
+    padding: 10px 18px;
+    text-decoration: none;
+}
+.success-card {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+    background-color: var(--light-accent);
+    border: 2px solid var(--dark-accent);
+    border-radius: 18px;
+    padding: 35px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+    .success-card h2 {
+        color: var(--dark-font);
+        margin-top: 0;
+    }
+
+    .success-card p {
+        font-size: 1.2em;
+        margin: 20px 0;
+    }
+    .success-card p {
+        margin-bottom: 25px; 
+    }
+
+    .success-card a {
+        text-decoration: none; 
+    }
+    .success-card .create-btn {
+        margin-top: 10px;
+        text-decoration: none;
+    }
+.create-reservation-card,
+.create-reservation-card div,
+.date-container,
+.date-group {
+    border: none !important;
+}
+
+

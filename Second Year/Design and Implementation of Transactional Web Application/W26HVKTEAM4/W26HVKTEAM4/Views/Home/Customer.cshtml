@@ -1,0 +1,69 @@
+﻿@model IEnumerable<W26HVKTEAM4.Models.Reservation>;
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var currentDate = DateOnly.FromDateTime(DateTime.Now);
+    var customer = ViewBag.CustomerInfo;
+    IEnumerable<W26HVKTEAM4.Models.Reservation> reservations = Model.Where(pr => pr.StartDate > currentDate).OrderBy(pr => pr.StartDate);
+    ViewData["CurrentlyLoggedInUser"] = customer.HvkuserId;
+}
+
+<main>
+    <div id="customer-info">
+        <h2>Welcome, <a asp-controller="Customer" asp-action="Details" asp-route-id="@customer.HvkuserId">@customer.FirstName @customer.LastName</a></h2>
+        <p>@customer.Email</p>
+        <p>@customer.Phone</p>
+        <p>@customer.Street</p>
+        <p>@customer.City, @customer.Province @customer.PostalCode</p>
+    </div>
+    <div id="tables-customer-home">
+        <div class="table-div">
+            <h2>Upcoming Reservations</h2>
+            <table>
+                <tr>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Pets</th>
+                </tr>
+                @foreach (var reservation in reservations)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => reservation.StartDate)</td>
+                        <td>@Html.DisplayFor(modelItem => reservation.EndDate)</td>
+                        <td>
+                            @foreach (var petRes in reservation.PetReservations)
+                            {
+                                <p>@Html.DisplayFor(modelItem => petRes.Pet.Name), </p>
+                            }
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+        <div class="table-div">
+            <h2>Your Pets</h2>
+            <a asp-controller="Pet" asp-action="Index" asp-route-id="@customer.HvkuserId">View Pet Details</a>
+            <p></p>
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <th>Breed</th>
+                    <th>Birth Year</th>
+                    <th>Gender</th>
+                </tr>
+                @foreach (var item in Model.DistinctBy(pr => pr.PetReservations.First().Pet))
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.PetReservations.First().Pet.Name)</td>
+                        <td>@Html.DisplayFor(modelItem => item.PetReservations.First().Pet.Breed)</td>
+                        <td>@Html.DisplayFor(modelItem => item.PetReservations.First().Pet.Birthyear)</td>
+                        <td>@Html.DisplayFor(modelItem => item.PetReservations.First().Pet.Gender)</td>
+                    </tr>
+                }
+            </table>
+            <br />
+        </div>
+    </div>
+</main>

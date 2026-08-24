@@ -1,0 +1,57 @@
+﻿@model W26HVKTEAM4.Models.Reservation
+
+@{
+    ViewData["Title"] = "Reservation Services";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<main>
+    <h2> Services</h2>
+    <h3>Final Step: Add services to your pet(s). Click "Finish" when you're done.</h3>
+    <p>
+        Reservation Dates:
+        @Model.StartDate.ToShortDateString()
+        -
+        @Model.EndDate.ToShortDateString()
+    </p>
+
+    @foreach (var petReservation in Model.PetReservations)
+    {
+        <div>
+            <h3>@petReservation.Pet.Name</h3>
+
+            <p>
+                <a asp-controller="PetReservationService"
+                   asp-action="Create"
+                   asp-route-petReservationId="@petReservation.PetReservationId"
+                   asp-route-reservationId="@Model.ReservationId" class="add-service-btn">
+                   
+                    Add Service
+                </a>
+            </p>
+
+            @if (petReservation.PetReservationServices.Any())
+            {
+                <ul>
+                    @foreach (var service in petReservation.PetReservationServices)
+                    {
+                        <li>@service.Service.ServiceDescription</li>
+                    }
+                </ul>
+            }
+            else
+            {
+                <p>No services added yet.</p>
+            }
+        </div>
+
+        <hr />
+    }
+
+    <a asp-controller="Reservation"
+       asp-action="Success"
+       asp-route-message="Reservation was successfully created."
+       class="finish-btn">
+        Finish
+    </a>
+</main>

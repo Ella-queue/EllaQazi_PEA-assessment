@@ -1,0 +1,56 @@
+﻿@model IEnumerable<W26HVKTEAM4.Models.Reservation>;
+
+@{
+    ViewData["Title"] = "End Pet Visit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var resStart = Model.FirstOrDefault().StartDate;
+    var resEnd = Model.FirstOrDefault().EndDate;
+    var numDays = resEnd.DayNumber - resStart.DayNumber;
+    var petReservations = Model.FirstOrDefault().PetReservations;
+    Decimal serviceRate = (decimal)0.0;
+    var petTotal = (decimal)0.0;
+    var overallTotal = (decimal)0.0;
+}
+<main>
+
+<div id="pet-visits">
+    <h3>Pet Totals</h3>
+    @foreach(var petVisit in petReservations)
+    {
+        petTotal = 0;
+        <div class="pet-visit-div">
+            <h4>@petVisit.Pet.Name</h4>
+            <p>Services</p>
+            <ul>
+                @foreach(var service in petVisit.PetReservationServices)
+                {
+                        @foreach(var rate in service.Service.DailyRates)
+                        {
+                            if(rate.ServiceId == service.ServiceId && (rate.DogSize == petVisit.Pet.DogSize || rate.DogSize == null))
+                            {
+                                serviceRate = rate.Rate;
+                                petTotal = petTotal + rate.Rate;
+                                <li>@service.Service.ServiceDescription : $@serviceRate</li>
+                            }
+                        }   
+                }
+            </ul>
+            <p>Daily Total:</p>
+            <p>$@petTotal</p>
+            @{
+               overallTotal += (petTotal * numDays); ;
+            }
+            <p>Overall Total:</p>
+            <p>$@overallTotal</p>
+                <form asp-action="Edit" asp-controller="Run" asp-route-id="@petVisit.RunId" asp-route-resID="@petVisit.ReservationId">
+                    @await Html.PartialAsync("_EditRun", petVisit.Run)
+                </form>
+        </div>
+    }
+</div>
+
+<div>
+        <a class="link-btn" asp-controller="Reservation" asp-action="Invoice" asp-route-reservationId="@Model.First().ReservationId">Confirm</a>
+    <a class="link-btn" asp-controller="Home" asp-action="Employee">Cancel</a>
+</div>
+</main>

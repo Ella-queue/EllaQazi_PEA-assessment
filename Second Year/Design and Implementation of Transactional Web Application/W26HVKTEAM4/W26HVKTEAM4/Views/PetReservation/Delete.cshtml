@@ -1,0 +1,23 @@
+﻿@model W26HVKTEAM4.Models.PetReservation
+
+<main>
+    <div>
+        <h2>Remove Pet</h2>
+
+        <p>Are you sure you want to remove this pet from the reservation?</p>
+
+        <p>@Model.Pet.Name</p>
+
+        <form asp-action="Delete" method="post">
+            <input type="hidden" asp-for="PetReservationId" />
+
+            <button class="delete-btn" type="submit">Yes, Remove</button>
+            <a asp-controller="Reservation"
+               asp-action="Edit"
+               asp-route-id="@Model.ReservationId"
+               class="remove-pet-service-btn">
+                Cancel
+            </a>
+        </form>
+    </div>
+</main>

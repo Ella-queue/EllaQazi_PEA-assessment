@@ -1,0 +1,92 @@
+﻿@model W26HVKTEAM4.Models.Reservation
+@{
+    ViewData["Title"] = "Invoice";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    double invoiceTotal = 0.00;
+    double petResTotal = 0.00;
+
+    int numDays = Model.EndDate.DayNumber - Model.StartDate.DayNumber;
+}
+<main>
+    <h1>Invoice</h1>
+    <div class="invoiceDiv">
+        <p>@Model.StartDate - @Model.EndDate (@numDays Days)</p>
+        <h2>Pets</h2>
+
+        @if (Model.PetReservations.Any())
+        {
+            
+            @foreach(var petRes in Model.PetReservations)
+            {
+                <div class="invoicePetRes">
+                    <h2>@petRes.Pet.Name</h2>
+                    <h4>Services</h4>
+                    <ul>
+                        @foreach(var petResService in petRes.PetReservationServices)
+                        {
+                            <li>@petResService.Service.ServiceDescription - - 
+                                @foreach (var dailyRate in petResService.Service.DailyRates)
+                                {
+                                    if (dailyRate.Service.ServiceId == petResService.Service.ServiceId && (dailyRate.DogSize == petRes.Pet.DogSize || dailyRate.DogSize == null))
+                                    {
+                                        @dailyRate.Rate
+                                        petResTotal = Math.Round(petResTotal + ((double)dailyRate.Rate * numDays),2);
+
+                                    }
+                                }
+                                $
+                            </li>
+                        }
+
+                    </ul>
+                    <h4>Discounts</h4>
+                    @if (petRes.PetReservationDiscounts.Any())
+                    {
+                        <ul>
+                            @foreach (var discounts in petRes.PetReservationDiscounts)
+                            {
+                                <li>
+                                    @discounts.Discount.Desciption - - @(discounts.Discount.Percentage * 100) %
+                                </li>
+                                petResTotal -= Math.Round(petResTotal*(double)discounts.Discount.Percentage,2);
+                            }
+                            
+                        </ul>
+                    }
+                    else
+                    {
+                        <p>There are no discounts for this pet.</p>
+                    }
+                    
+                    <p>Pet Total: @Math.Round(petResTotal,2) $</p>
+                    @{
+                        invoiceTotal += Math.Round(petResTotal,2);
+                    }
+                </div>    
+                petResTotal = 0.00;
+            }
+        }
+        <h3>Reservation Discounts</h3>
+        @if (Model.ReservationDiscounts.Any())
+        {
+           <ul>
+                @foreach (var discounts in Model.ReservationDiscounts)
+                {
+                    <li>
+                        @discounts.Discount.Desciption -- @(discounts.Discount.Percentage * 100) %
+                    </li>
+                    invoiceTotal -=Math.Round(invoiceTotal * (double)discounts.Discount.Percentage, 2) ;
+                }
+            </ul>
+        }
+        else
+        {
+            <p>There are no Discounts for this reservation.</p>
+        }
+
+        <h3>Total: @Math.Round(invoiceTotal,2)$</h3>
+    </div>
+    <a asp-action="EndReservationComplete" asp-route-reservationId="@Model.ReservationId" id="invoiceConfirmation">Print and Continue</a>
+</main>

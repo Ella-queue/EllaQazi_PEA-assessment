@@ -1,0 +1,17 @@
+﻿@model W26HVKTEAM4.Models.Run
+
+<input type="hidden" asp-for="RunId" />
+<input type="hidden" asp-for="Size" />
+<input type="hidden" asp-for="Location" />
+    <label class="form-check-label">
+        <input class="form-check-input" asp-for="Covered" /> @Html.DisplayNameFor(model => model.Covered)
+    </label>
+    <br />
+    <label asp-for="Status" class="control-label"></label>
+    <select asp-for="Status" class="form-control">
+        <option value="1">Available</option>
+        <option value="2">Needs Cleaning</option>
+        <option value="3">Broken</option>
+    </select>
+    <br />
+    <input type="submit" value="Save" class="btn btn-primary" />

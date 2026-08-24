@@ -1,0 +1,185 @@
+﻿@model W26HVKTEAM4.Models.Reservation
+
+@{
+    ViewData["Title"] = "Start Visit / Contract";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    int durationInDays = Model.EndDate.DayNumber - Model.StartDate.DayNumber;
+    if (durationInDays <= 0) durationInDays = 1;
+    decimal subtotal = 0m;
+
+}
+<main>
+
+    <h2>Start Visit - Reservation #@Model.ReservationId</h2>
+
+    <form asp-action="StartVisit" method="post">
+        <input type="hidden" asp-for="ReservationId" />
+
+        <div>
+            <h3>Contract Details</h3>
+            <p><strong>Start Date:</strong> @Model.StartDate</p>
+            <p><strong>End Date:</strong> @Model.EndDate</p>
+            <p><strong>Total Days:</strong> @durationInDays</p>
+        </div>
+
+        <div>
+            <h3>Charges Breakdown</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Pet</th>
+                        <th>Service / Item</th>
+                        <th>Rate</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var pr in Model.PetReservations)
+                    {
+                        if (pr.PetReservationServices != null)
+                        {
+                            foreach (var prs in pr.PetReservationServices)
+                            {
+                                var currentRate = prs.Service.DailyRates.FirstOrDefault();
+                                decimal rateAmount = currentRate != null ? currentRate.Rate : 0m;
+
+                                decimal serviceCost = rateAmount * durationInDays;
+                                subtotal += serviceCost;
+
+                                <tr>
+                                    <td>@(prs == pr.PetReservationServices.First() ? pr.Pet.Name : "")</td>
+                                    <td>@prs.Service.ServiceDescription</td>
+                                    <td>$@rateAmount.ToString("0.00")</td>
+                                    <td>$@serviceCost.ToString("0.00")</td>
+                                </tr>
+                            }
+                        }
+                    }
+                </tbody>
+            </table>
+            
+            <div>
+                <h3><strong>Total Amount: $@subtotal.ToString("0.00")</strong></h3>
+            </div>
+        </div>
+
+        <hr />
+
+        <div>
+            <h3>Check-In Tasks</h3>
+
+            <h4>1. Vaccination Validation</h4>
+            @{
+                var today = DateOnly.FromDateTime(DateTime.Now);
+            }
+
+            @foreach (var pr in Model.PetReservations)
+            {
+                <div>
+                    <h5>Pet: @pr.Pet.Name</h5>
+
+                    @if (pr.Pet.PetVaccinations != null && pr.Pet.PetVaccinations.Any())
+                    {
+                        <table>
+                            <tr>
+                                <th>Vaccine</th>
+                                <th>Expiry Date</th>
+                                <th>Status</th>
+                            </tr>
+                            @foreach (var pv in pr.Pet.PetVaccinations)
+                            {
+                                bool isExpired = pv.ExpiryDate < today;
+                                string expiredStyle = isExpired ? "border-color: red;" : "";
+
+                                <tr>
+                                    <td>@pv.Vaccination.Name</td>
+                                    <td>
+                                        <input type="hidden" name="VaccinationKeys" value="@pv.PetId|@pv.VaccinationId" />
+                                        <input type="date" name="ExpiryDates_@(pv.PetId)_@(pv.VaccinationId)"
+                                               value="@pv.ExpiryDate.ToString("yyyy-MM-dd")"
+                                               class="form-input"
+                                               style="@expiredStyle" />
+                                    </td>
+                                    <td>
+                                        @if (isExpired)
+                                        {
+                                            <span style="color: red; font-weight: bold;">Expired! Update Required.</span>
+                                        }
+                                        else
+                                        {
+                                            <span style="color: green; font-weight: bold;">Valid</span>
+                                        }
+                                        <label>
+                                        |     
+                                        <input type="checkbox" name="Verified_@(pv.PetId)_@(pv.VaccinationId)" value="true" @(pv.VaccinationChecked ? "checked" : "") />
+                                            Verify Vaccination
+                                        </label>
+                                    </td>
+                                </tr>
+                            }
+                        </table>
+                    }
+                    else
+                    {
+                        <p>No vaccinations on file for this pet.</p>
+                    }
+                </div>
+            }
+
+            <h4>2. Run Allocation</h4>
+            <div>
+                <table>
+                    <tr>
+                        <th>Pet</th>
+                        <th>Assign Run</th>
+                    </tr>
+                    @foreach (var pr in Model.PetReservations)
+                    {
+                        <tr>
+                            <td><strong>@pr.Pet.Name</strong></td>
+                            <td>
+                                @{
+                                    IEnumerable<W26HVKTEAM4.Models.Run> suitableRuns = ViewBag.AvailableRuns;
+
+                                    if (pr.Pet.DogSize == "L")
+                                    {
+                                        suitableRuns = suitableRuns.Where(r => r.Size == "L");
+                                    }
+
+                                    if (pr.Pet.Climber)
+                                    {
+                                        suitableRuns = suitableRuns.Where(r => r.Covered == true);
+                                    }
+
+                                    if (pr.Pet.Barker)
+                                    {
+                                        suitableRuns = suitableRuns.Where(r => r.Location == "B");
+                                    }
+                                }
+
+                                <select name="RunIds_@pr.PetReservationId" class="form-input" required>
+                                    <option value="">Select a Run</option>
+
+                                    @if (suitableRuns != null)
+                                    {
+                                        foreach (var run in suitableRuns)
+                                        {
+                                            string coverText = run.Covered ? "Covered" : "Open";
+                                            <option value="@run.RunId">Run #@run.RunId (Size: @run.Size, @coverText, Loc: @run.Location)</option>
+                                        }
+                                    }
+                                </select>
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <input type="submit" value="Confirm Check-In & Start Visit" class="btn btn-success" />
+            <a asp-action="Employee" asp-controller="Home" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</main>

@@ -1,0 +1,54 @@
+﻿@model IEnumerable<W26HVKTEAM4.Models.Hvkuser>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<main>
+    <h1>Customer List</h1>
+
+    <p>
+        <a asp-action="Create">Create New Customer</a>
+    </p>
+    <div>
+        @if (!Model.Any())
+        {
+            <h2>Sorry, there are no customers that fit your search conditions.</h2>
+        }
+        else
+        {
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            Customer
+                        </th>
+                        <th>@Html.DisplayNameFor( x => x.Email)</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                
+                    @foreach (var item in Model) {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.FirstName)
+            
+                                @Html.DisplayFor(modelItem => item.LastName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Email)
+                            </td>
+                            <td>
+                                    <a asp-controller="Customer" asp-action="Update" asp-route-id="@item.HvkuserId">Update Information</a> |
+                                    <a asp-action="Details" asp-route-id="@item.HvkuserId">Details</a> |
+                                    <a asp-controller="Customer" asp-action="Delete" asp-route-id="@item.HvkuserId">Delete User</a>
+                            </td>
+                        </tr>   
+                    }
+                </tbody>
+            </table>
+        }
+       
+    </div>
+</main>
